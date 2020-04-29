@@ -1,0 +1,86 @@
+{% extends 'adminpanel/layout.html' %}
+{% block content %}
+            <div class="content-page">
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row page-title">
+                            <div class="col-md-12">
+                                <nav aria-label="breadcrumb" class="float-right mt-1">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#">Shreyu</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Advanced</li>
+                                    </ol>
+                                </nav>
+                                <h4 class="mb-1 mt-0">Manage Employee</h4>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- select -->
+                     <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title mt-0 mb-1">Add Department</h4>
+                                    <p class="sub-header">
+                                        You can add employee here
+                                    </p>
+                                    <form  method="POST" action =  "" enctype="multipart/form-data">
+                                    <div class="row">
+                                        
+                                            
+                                                {% csrf_token %}
+                                                {% for field in form %}
+                                                <div class="col-xl-3 col-sm-6">
+                                                    <div class="form-group mt-3 mt-sm-0">
+                                                    <label class="form-control-label">{{ field.label_tag }}</label>
+                                                    <div class="input-group input-group-merge">
+                                                        
+                                                        {{ field }}<br>
+                                                        
+                                                    {% for error in field.errors %}
+                                                      <p style="color: red">{{ error }}</p>
+                                                    {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                  
+                                                {% endfor %}
+                                                <button type="submit" class="btn btn-success">
+                                                    Submit
+                                                </button>
+
+                                       
+                                        
+                                    </div>
+                                </form>
+                                </div> <!-- end card-body -->
+                            </div> <!-- end card-->
+                        </div> <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                </div> <!-- content -->
+
+                
+
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                2019 &copy; Shreyu. All Rights Reserved. Crafted with <i class='uil uil-heart text-danger font-size-12'></i> by <a href="https://coderthemes.com" target="_blank">Coderthemes</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
+
+            </div>
+{% endblock  %}
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+     
