@@ -22,7 +22,10 @@
         <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'assets/libs/dropzone/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'assets/libs/summernote/summernote-bs4.css' %}" rel="stylesheet" type="text/css" />
-
+        <link href="{% static 'assets/libs/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/libs/datatables/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/libs/datatables/buttons.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/libs/datatables/select.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" /> 
 
     </head>
 
@@ -244,11 +247,11 @@
             <!-- ========== Left Sidebar Start ========== -->
             <div class="left-side-menu">
                 <div class="media user-profile mt-2 mb-2">
-                    <img src="assets/images/users/avatar-7.jpg" class="avatar-sm rounded-circle mr-2" alt="Shreyu" />
-                    <img src="assets/images/users/avatar-7.jpg" class="avatar-xs rounded-circle mr-2" alt="Shreyu" />
+                    <img src="{{request.user.avatar}}" class="avatar-sm rounded-circle mr-2" alt="Shreyu" />
+                    <img src="{{request.user.avatar}}" class="avatar-xs rounded-circle mr-2" alt="Shreyu" />
 
                     <div class="media-body">
-                        <h6 class="pro-user-name mt-0 mb-0">Nik Patel</h6>
+                        <h6 class="pro-user-name mt-0 mb-0">{{ request.user.first_name }} {{request.user.last_name}}</h6>
                         <span class="pro-user-desc">Administrator</span>
                     </div>
                     <div class="dropdown align-self-center profile-dropdown-menu">
@@ -309,26 +312,20 @@
                             <li>
                                 <a href="javascript: void(0);">
                                     <i data-feather="inbox"></i>
-                                    <span> Email </span>
+                                    <span> Manage Employee </span>
                                     <span class="menu-arrow"></span>
                                 </a>
 
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="email-inbox.html">Inbox</a>
-                                    </li>
-                                    <li>
-                                        <a href="email-read.html">Read</a>
-                                    </li>
-                                    <li>
-                                        <a href="email-compose.html">Compose</a>
+                                        <a href="email-inbox.html">Add Employee</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="javascript: void(0);">
                                     <i data-feather="briefcase"></i>
-                                    <span> Projects </span>
+                                    <span> Manage Manager </span>
                                     <span class="menu-arrow"></span>
                                 </a>
     
@@ -344,7 +341,7 @@
                             <li>
                                 <a href="javascript: void(0);">
                                     <i data-feather="bookmark"></i>
-                                    <span> Tasks </span>
+                                    <span> Manage Attendance </span>
                                     <span class="menu-arrow"></span>
                                 </a>
     
@@ -361,7 +358,7 @@
                             <li>
                                 <a href="javascript: void(0);">
                                     <i data-feather="file-text"></i>
-                                    <span> Pages </span>
+                                    <span> Leave Type </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
@@ -407,7 +404,7 @@
                             <li>
                                 <a href="javascript: void(0);">
                                     <i data-feather="layout"></i>
-                                    <span> Layouts </span>
+                                    <span> Manage Department </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
@@ -438,12 +435,12 @@
                                 </ul>
                             </li>
 
-                            <li class="menu-title">Components</li>
+                            <li class="menu-title">Report</li>
 
                             <li>
                                 <a href="javascript: void(0);">
                                     <i data-feather="package"></i>
-                                    <span> UI Elements </span>
+                                    <span> Attendance Report </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
@@ -472,7 +469,7 @@
                             <li>
                                 <a href="javascript: void(0);" aria-expanded="false">
                                     <i data-feather="file-text"></i>
-                                    <span> Forms </span>
+                                    <span> Leave Report </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
@@ -497,28 +494,7 @@
                                 </ul>
                             </li>
 
-                            <li>
-                                <a href="charts-apex.html" aria-expanded="false">
-                                    <i data-feather="pie-chart"></i>
-                                    <span> Charts </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);" aria-expanded="false">
-                                    <i data-feather="grid"></i>
-                                    <span> Tables </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul class="nav-second-level" aria-expanded="false">
-                                    <li>
-                                        <a href="tables-basic.html">Basic</a>
-                                    </li>
-                                    <li>
-                                        <a href="tables-datatables.html">Advanced</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            
                         </ul>
                     </div>
                     <!-- End Sidebar -->
@@ -591,6 +567,23 @@
         <script src="{% static 'assets/libs/select2/select2.min.js' %}"></script>
         <script src="{% static 'assets/libs/multiselect/jquery.multi-select.js' %}"></script>
         <script src="{% static 'assets/js/pages/form-advanced.init.js' %}"></script>
+
+        <script src="{% static 'assets/libs/datatables/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables/dataTables.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables/responsive.bootstrap4.min.js' %}"></script>
+        
+        <script src="{% static 'assets/libs/datatables/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables/buttons.flash.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables/buttons.print.min.js' %}"></script>
+
+        <script src="{% static 'assets/libs/datatables/dataTables.keyTable.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables/dataTables.select.min.js' %}"></script>
+        <script src="{% static 'assets/js/pages/datatables.init.js' %}"></script>
+
+        <!-- Datatables init -->
         
         <!-- App js -->
         <script src="{% static 'assets/js/app.min.js' %}"></script>

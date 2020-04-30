@@ -32,44 +32,28 @@ class Role(models.Model):
     def __str__(self):
        return self.role
 
-
-class User(AbstractUser):
-     roles = models.ForeignKey(Role,on_delete=models.CASCADE,null=True)
-
 class Department(models.Model):
     name = models.CharField(max_length=11)
     status = models.IntegerField(choices=STATUS, default=1)
     updated_on = models.DateTimeField(auto_now= True)
     created_on = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+       return self.name
 
-class Manager(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
+class User(AbstractUser):
+    roles = models.ForeignKey(Role,on_delete=models.CASCADE,null=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE,null=True)
+    manager = models.ForeignKey('self', on_delete=models.CASCADE,null=True)
     idno = models.CharField(max_length=11)
     name = models.CharField(max_length=255)
     status = models.IntegerField(choices=STATUS, default=1)
     passwordbkp = models.CharField(max_length=255)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to = "media/")
     phone = models.CharField(max_length=255)
     birthday = models.CharField(max_length=255)
     updated_on = models.DateTimeField(auto_now= True)
     created_on = models.DateTimeField(auto_now_add=True)
-
-class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    idno = models.CharField(max_length=11)
-    name = models.CharField(max_length=255)
-    status = models.IntegerField(choices=STATUS, default=1)
-    managerid = models.ForeignKey(Manager, on_delete=models.CASCADE)
-    passwordbkp = models.CharField(max_length=255)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to = "images/")
-    phone = models.CharField(max_length=255)
-    birthday = models.CharField(max_length=255)
-    updated_on = models.DateTimeField(auto_now= True)
-    created_on = models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return self.user.username
 
 class Leavetype(models.Model):
     leavetype = models.CharField(max_length=255)

@@ -21,9 +21,9 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="header-title mt-0 mb-1">Add Department</h4>
+                                    <h4 class="header-title mt-0 mb-1">Add Leave Type</h4>
                                     <p class="sub-header">
-                                        You can add employee here
+                                        You can add Leave Type here
                                     </p>
                                     <form  method="POST" action =  "" enctype="multipart/form-data">
                                     <div class="row">
@@ -64,7 +64,7 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <h4 class="header-title mt-0 mb-1">All Departments</h4>
+                                    <h4 class="header-title mt-0 mb-1">All Leave</h4>
                                     <p class="sub-header">
                                         
                                     </p>
@@ -72,7 +72,9 @@
                                     <table id="selection-datatable" class="table dt-responsive nowrap">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
+                                                <th>Type</th>
+                                                <th>Limit</th>
+
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -80,11 +82,12 @@
                                     
                                     
                                         <tbody>
-                                            {% for department in departments %}
+                                            {% for leavetype in leavetypes %}
                                                 
                                                 <tr>
-                                                    <td>{{department.name}}</td>
-                                                    <td>{{department.status}}</td>
+                                                    <td>{{leavetype.leavetype}}</td>
+                                                    <td>{{leavetype.limit}}</td>
+                                                    <td>{{leavetype.status}}</td>
                                                     <td>
                                                         <button>Edit</button>
                                                         <button>Delete</button>
@@ -109,7 +112,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
-                                2019 &copy; Shreyu. All Rights Reserved. Crafted with <i class='uil uil-heart text-danger font-size-12'></i> by <a href="https://coderthemes.com" target="_blank">Coderthemes</a>
+                                2019 &copy; Weber Sparsh. All Rights Reserved. Crafted with <i class='uil uil-heart text-danger font-size-12'></i> by <a href="#" target="_blank">Weber Sparsh</a>
                             </div>
                         </div>
                     </div>
